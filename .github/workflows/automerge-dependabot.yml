@@ -9,9 +9,9 @@ on:
         required: true
         type: string
 
-permissions: write-all
-# permissions:
-#   pull-requests: write
+# permissions: write-all
+permissions:
+  pull-requests: write
 
 jobs:
   auto-merge:
