@@ -8,9 +8,6 @@ on:
         description: 'GitHub actor to check'
         required: true
         type: string
-    secrets:
-      GITHUB_TOKEN:
-        required: true
 
 permissions:
   pull-requests: write
@@ -29,3 +26,4 @@ jobs:
         if: steps.metadata.outputs.update-type == 'version-update:semver-minor' || steps.metadata.outputs.update-type == 'version-update:semver-patch'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
