@@ -8,6 +8,9 @@ on:
         description: 'GitHub actor to check'
         required: true
         type: string
+    secrets:
+      GITHUB_TOKEN:
+        required: true
 
 permissions:
   pull-requests: write
@@ -25,4 +28,4 @@ jobs:
         run: gh pr review --approve "${{ github.event.pull_request.html_url }}"
         if: steps.metadata.outputs.update-type == 'version-update:semver-minor' || steps.metadata.outputs.update-type == 'version-update:semver-patch'
         env:
-          GH_TOKEN: ${{ secrets.SHARED_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
