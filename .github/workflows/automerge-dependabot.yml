@@ -1,5 +1,6 @@
 ---
 name: Dependabot auto-merge
+
 on:
   workflow_call:
     inputs:
@@ -8,7 +9,8 @@ on:
         required: true
         type: string
 
-permissions: write-all
+permissions:
+  pull-requests: write
 
 jobs:
   auto-merge:
@@ -18,8 +20,10 @@ jobs:
       - name: Dependabot metadata
         id: metadata
         uses: dependabot/fetch-metadata@v2.1.0
+
       - name: Enable Pull Request Automerge
         run: gh pr merge --squash --auto "${{ github.event.pull_request.html_url }}"
         if: steps.metadata.outputs.update-type == 'version-update:semver-minor' || steps.metadata.outputs.update-type == 'version-update:semver-patch'
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
