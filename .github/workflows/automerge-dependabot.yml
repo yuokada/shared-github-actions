@@ -12,6 +12,7 @@ on:
 # permissions: write-all
 permissions:
   pull-requests: write
+  contents: write
 
 jobs:
   auto-merge:
